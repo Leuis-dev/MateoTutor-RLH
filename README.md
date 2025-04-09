@@ -327,3 +327,7 @@ La documentación del sistema debe estar centralizada en el sitio [https://docs.
 Modelo arquitectonico:
 
 Con respecto al modelo arquitectonico, el que esta descrito en el diagrama correspondiente corresponde a una aqruitectura por capas
+
+Diagramas UML: 
+
+en la carpeta de recursos del proyecto estan los diagramas uml de secuencia, arquitectura y actividad que describen el proceso que se aborda con el software y la arquitectura del proyecto
