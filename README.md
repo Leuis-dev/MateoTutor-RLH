@@ -260,3 +260,55 @@ NOTA:
 
 	[*] Eliminar un contenedor detenido
 		sudo docker rm Mateo
+Requerimientos:
+
+1 - Despliegue local funcional
+El sistema debe poder ejecutarse localmente en una máquina con Windows sin necesidad de Docker.
+
+2 - Soporte para contenedores Docker
+El sistema debe ser compatible con Docker para facilitar su distribución y despliegue en distintos entornos.
+
+3 - Accesibilidad a través de navegador web
+Los usuarios deben poder acceder al sistema mediante una URL local o del servidor.
+
+4 - Acceso al servidor institucional mediante VPN
+El sistema debe permitir su ejecución remota en el servidor del curso, siendo accesible sólo mediante conexión VPN de la UACh.
+
+Especificaciones:
+
+1 - Comando de ejecución local
+Para ejecutar el sistema localmente, se debe correr el comando pnpm dev o npm run dev dentro del directorio del proyecto.
+
+2 - Puerto de acceso local y remoto
+En local: el sistema corre por defecto en http://localhost:3000/.
+En el servidor: se accede mediante http://146.83.216.166:5007/.
+
+3 - Creación de imagen Docker
+La imagen del sistema debe crearse usando el comando docker build --no-cache -t mtutor-img:tag . en el directorio donde está el Dockerfile.
+
+4 - Configuración de VPN FortiClient
+La VPN debe ser configurada con los siguientes datos:
+	Gateway: vpn.uach.cl
+	Clave pre-compartida: uaustral.,2016
+	Método de autenticación: Clave pre-compartida
+  
+ Requisitos funcionales (RF)
+RF1 - Despliegue local de la aplicación
+El sistema debe permitir ejecutar la aplicación de manera local mediante los comandos npm run dev o pnpm dev, y estar disponible en http://localhost:3000.
+
+RF2 - Visualización del sistema desde el navegador
+El usuario debe poder acceder a la interfaz web del tutor a través de un navegador una vez ejecutada la app en local o en el servidor.
+
+RF3 - Despliegue en servidor institucional (UACh)
+La aplicación debe poder desplegarse en un servidor remoto al que se accede mediante VPN y, eventualmente, SSH. La aplicación debe ser accesible mediante la URL http://146.83.216.166:5007.
+
+RF4 - Crear contenedores Docker a partir del proyecto
+El sistema debe permitir generar imágenes y contenedores Docker funcionales para ejecutar el proyecto, utilizando el archivo Dockerfile provisto.
+
+Requisitos no funcionales (RNF)
+
+RNF1 - Compatibilidad multiplataforma para el desarrollo
+El proyecto debe poder ejecutarse en sistemas Windows (con WSL) y también en entornos Linux para fines de desarrollo y despliegue.
+
+RNF2 - Documentación accesible y actualizada
+La documentación del sistema debe estar centralizada en el sitio [https://docs.lm.inf.uach.cl/instructions/client-side-template], incluyendo instrucciones sobre instalación, tecnologías, API y despliegue.
