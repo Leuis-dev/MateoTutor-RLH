@@ -1,19 +1,18 @@
 # Front-End Mateo Tutor
-- v0.2.5.1 (Última versión única correspondiente a esta rama)
+- v0.2.5.1 (Última versión única correspondiente a este repositorio - 14 abril 2025)
 
 ## A tener en cuenta:
-Este repositorio corresponde a una rama del proyecto original [https://github.com/learner-model-uach/TutorIntegrado.git]
-Y todo el trabajo realizado aquí, es bajo el contexto de la asignatura "Taller de Ingeniería de Software (INFO 282)"
+Este repositorio corresponde a una copia de la rama "frontend-creacion-modificacion" del proyecto [https://github.com/learner-model-uach/TutorIntegrado.git]
+Y todo el trabajo realizado aquí, es bajo el contexto de la asignatura "MÉTODOS Y MODELOS DE ING DE SOFTWARE (INFO 290)"
 
 
 ## Documentación original del proyecto MATEO TUTOR INTELIGENTE:
 [https://docs.lm.inf.uach.cl/instructions/client-side-template]
 En el link anterior está TODA la información relacionada a este sistema, desde las instalaciones necesarias, las librerias que se usaron, las tecnologías utilizadas, información de la API, administración, base de datos, etc...
 
-***************************************************************************************************************
-### DESPLIEGUE LOCAL
-***************************************************************************************************************
-
+╔══════════════════╗
+║ Despliegue Local ║
+╚══════════════════╝
 ## Pasos necesarios para ejecutar localmente sin usar Docker (WINDOWS)
 
 NOTAS:
@@ -44,6 +43,75 @@ NOTAS:
 [*] Ver la APP en ejecucion:
 	http://localhost:3000/
 
+╔═══════════════════════════════════╗
+║ Despliegue en el Server del Curso ║
+╚═══════════════════════════════════╝
+## INSTALAR y EJECUTAR VPN de la UACh (Para VER la APP o ENTRAR al server del curso)
+
+[1] Ingresar a https://www.fortinet.com/support/product-downloads
+[2] Seleccionar "FortiClient VPN Only"
+[3] Seleccionar Windows/Downloads
+[4] Ejecutar el archivo descargado y esperar a que termine la instalación
+
+[5] Ejecutar acceso directo creado en el escritorio
+[6] Ingresar a configurar VPN
+[7] Ingresar los siguientes datos:
+    Nombre de Conexión: VPN UACh
+    Descripción: Conexión UACh
+    Gateway Remoto: vpn.uach.cl
+    Método de Autenticación: Clave pre-compartida
+    Clave pre-compartida: uaustral.,2016
+[8] Presionar el botón guardar
+
+[9] Ingresar con credenciales de "infoalumnos" o "siveducmd"
+    ** Así debe ingresarse el Rut: 20123456-7 **
+
+[*] Para desconectar la VPN:
+    a) buscar el icono de FortiClient en la bandeja de apps ocultas (de la barra inferior)
+    b) click derecho y darle a "Desconectar VPN UACh"
+
+## VER la APP desplegada en el server
+
+NOTAS:
+	- NO es necesario conectarse al server mediante SSH para ver la APP desplegada, solo es necesario estar conectado con la VPN
+	- Si al ingresar a la url no aparece NADA, es por que NO hay ningun CONTAINER de la imagen EJECUTANDOSE
+	
+[*] http://146.83.216.166:5007/
+
+	- La APP está corriendo en el puerto 3007, pero se accede mediante el 5007, ya que esa es la ruta con el certificado
+	- Se configuró nginx para que la ruta https://146.83.216.166:5007/ mapee al puerto 3007
+	- Como el certificado es autogenerado, Cuando entren les va a decir que el sitio no es confiable, pero ingresan de todas maneras
+
+## INSTALAR SSH (WINDOWS)(Para entrar al server del curso)
+
+[*] Verificar si tenemos instalado SSH:
+	a) En "cmd" escribir "ssh" y presionar enter
+	b) Si SSH está instalado verás algo como: "usage: ssh [-46AaCfGgKkMN ..."
+	c) Si NO está instalado verás algo como: "ssh is not recognized as ..."
+
+[*] Instalar el CLIENTE SSH:
+	a) Configuracion -> Sistema -> Características opcionales -> Agregar una característica opcional
+	b) En el cuadro de búsqueda, escribe "Cliente de OpenSSH"
+	c) Seleccionalo y haz clic en "Siguiente" y luego en "Agregar"
+
+[*] Instalar el SERVIDOR SSH (Para recibir conexiones SSH)(OPCIONAL):
+	a) Configuracion -> Sistema -> Características opcionales -> Agregar una característica opcional
+	b) En el cuadro de búsqueda, escribe "Servidor de OpenSSH"
+	c) Seleccionalo y haz clic en "Siguiente" y luego en "Agregar"
+
+## Conectarse al SERVER/HOST del curso (WINDOWS / LINUX)
+NOTAS:
+	- ssh nombreServer@ipServidor -p nroDePuerto
+	- Para conectarse al server NO es necesario especificar un puerto
+	- En los puertos 3007 y 4007 se despliega la APP
+
+[*] En "cmd" ejecutar:
+		ssh grupo7@146.*******
+		password: *****
+
+╔══════════════════════════════╗
+║ TODO lo Relacionado a DOCKER ║
+╚══════════════════════════════╝
 ## INSTALAR Subsistema LINUX en Windows (WSL / WSL 2)(WINDOWS)(Necesario para usar Docker)
 
 [1] Buscar e instalar desde la "Microsoft Store", "Windows Subsystem for Linux"
@@ -82,22 +150,25 @@ NOTA: En una terminal "WSL" es necesario iniciar primero el docker desktop desde
 	f) Iniciar Docker con la "configuración predeterminada"
 	g) Crear una cuenta en "Docker" (OPCIONAL)(Usar la de GitHub)
 
-## Crear IMAGEN Docker del PROYECTO (WINDOWS)
+## Crear IMAGEN Docker del PROYECTO
 
 NOTAS:
 - ANTES de crear una nueva imagen, verificar si ya hay una existente que corresponda al proyecto
 - NO es necesario hacer "gitclone" del proyecto, ya que el propio dockerfile lo hace e instala TODO
 - Si tienes "Windows Home", Sólo puedes usar imágenes base y contenedores de y para LINUX
 
-[*] Para INICIAR Docker:
-		En WINDOWS simplemente hay que abrir el programa "Docker Desktop"
+[*] INICIAR Docker:
+	Abrir el programa "Docker Desktop" (windows)
+	No es necesario (linux)
 
-[*] Para Ver las imagenes existentes, ejecutar en "cmd":
-		docker images
+[*] Para Ver las imágenes existentes:
+	docker images (windows)
+	sudo docker images (linux)
 
-[*] Para CREAR la imagen:
-	Estando en el MISMO directorio del archivo "Docker", ejecutar en "cmd":
-        docker build --no-cache -t mtutor-img:tag .
+[*] Para CREAR una nueva imágen:
+	Estando en el MISMO directorio del archivo "Docker":
+        docker build --no-cache -t mtutor-img:tag . (windows)
+		sudo docker build --no-cache -t mtutor-img:tag . (linux)
 
 ## Ejecutar un NUEVO CONTAINER basado en una IMAGEN Docker
 
@@ -105,163 +176,57 @@ NOTA:
 - ANTES de ejecutar un container, verificar si ya hay alguno en ejecucion que corresponda al proyecto
 - Un contenedor es una instancia en ejecución de una imagen
 - Al ejecutar una imagen, se ejecuta un nuevo "contenedor" basado en dicha imagen
-- Se pueden ejecutar simultaneamente distintos "contenedores" basados en una misma imagen
+- Se pueden ejecutar simultáneamente distintos "contenedores" basados en una misma imagen
 
 [*] INICIAR Docker:
-		En WINDOWS simplemente hay que abrir el programa "Docker Desktop"
+	Abrir el programa "Docker Desktop" (windows)
+	No es necesario (linux)
 
 [*] Ejecutar el Container:
-	a) Opción 1: Ejecutar en "cmd":
-		docker run --name MateoCont -p 3007:3000 mtutor-img:tag
+	docker run --name MTutor-app -p 3007:3000 mtutor-img:tag (windows)
+	sudo docker run --name MTutor-app -p 3007:3000 mtutor-img:tag (linux)
 
-		- 3007 Es el puerto de la maquina host (localhost)
-		- 3000 Es el puerto dentro del contenedor Docker
-
-	b) Opción 2: (Mediante la interfaz grafica del programa "Docker Desktop")
-
-[*] Ver la APP en ejecucion:
-	http://localhost:3007/
-
-## Comandos útiles DOCKER (WINDOWS / Linux)
-
-	[*] Ver las imagenes EXISTENTES
-		docker images
-
-	[*] Ver TODOS los contenedores EXISTENTES
-		docker ps -a
-
-	[*] Ver SÓLO los contenedores en EJECUCIÓN
-		docker ps
-
-	[*] Iniciar la ejecucion de un contenedor EXISTENTE
-		docker start Mateo
-
-	[*] Detener la ejecucion de un contenedor
-		docker stop Mateo
-
-	[*] Eliminar un contenedor detenido
-		docker rm Mateo
-
-
-***************************************************************************************************************
-### DESPLIEGUE EN SERVER (Server del Curso)
-***************************************************************************************************************
-
-## INSTALAR y EJECUTAR VPN de la UACh (Para VER la APP o ENTRAR al server del curso)
-
-[1] Ingresar a https://www.fortinet.com/support/product-downloads
-[2] Seleccionar "FortiClient VPN Only"
-[3] Seleccionar Windows/Downloads
-[4] Ejecutar el archivo descargado y esperar a que termine la instalación
-
-[5] Ejecutar acceso directo creado en el escritorio
-[6] Ingresar a configurar VPN
-[7] Ingresar los siguientes datos:
-    Nombre de Conexión: VPN UACh
-    Descripción: Conexión UACh
-    Gateway Remoto: vpn.uach.cl
-    Método de Autenticación: Clave pre-compartida
-    Clave pre-compartida: uaustral.,2016
-[8] Presionar el botón guardar
-
-[9] Ingresar con credenciales de "infoalumnos" o "siveducmd"
-    - Así debe ingresarse el Rut: 20123456-7
-
-[*] Para desconectar la VPN:
-    a) buscar el icono de FortiClient en la bandeja de apps ocultas (de la barra inferior)
-    b) click derecho y darle a "Desconectar VPN UACh"
-
-## VER la APP desplegada en el server
-
-NOTAS:
-	- NO es necesario conectarse al server mediante SSH para ver la APP desplegada, solo es necesario estar conectado con la VPN
-	- Si al ingresar a la url no aparece NADA, es por que NO hay ningun CONTAINER de la imagen EJECUTANDOSE
-	
-[*] http://146.83.216.166:5007/
-
-	- La APP está corriendo en el puerto 3007, pero se accede mediante el 5007, ya que esa es la ruta con el certificado
-	- Se configuró nginx para que la ruta https://146.83.216.166:5007/ mapee al puerto 3007
-	- Como el certificado es autogenerado, Cuando entren les va a decir que el sitio no es confiable, pero ingresan de todas maneras
-
-## INSTALAR SSH (WINDOWS)(Para entrar al server del curso)
-
-[*] Verificar si tenemos instalado SSH:
-	a) En "cmd" escribir "ssh" y presionar enter
-	b) Si SSH está instalado verás algo como: "usage: ssh [-46AaCfGgKkMN ..."
-	c) Si NO está instalado verás algo como: "ssh is not recognized as ..."
-
-[*] Instalar el CLIENTE SSH:
-	a) Configuracion -> Sistema -> Características opcionales -> Agregar una característica opcional
-	b) En el cuadro de búsqueda, escribe "Cliente de OpenSSH"
-	c) Seleccionalo y haz clic en "Siguiente" y luego en "Agregar"
-
-[*] Instalar el SERVIDOR SSH (Para recibir conexiones SSH)(OPCIONAL):
-	a) Configuracion -> Sistema -> Características opcionales -> Agregar una característica opcional
-	b) En el cuadro de búsqueda, escribe "Servidor de OpenSSH"
-	c) Seleccionalo y haz clic en "Siguiente" y luego en "Agregar"
-
-## Conectarse al SERVER/HOST del curso
-NOTAS:
-	- ssh nombreServer@ipServidor -p nroDePuerto
-	- Para conectarse al server NO es necesario especificar un puerto
-	- En los puertos 3007 y 4007 se despliega la APP
-
-[*] En "cmd" ejecutar:
-		ssh grupo7@146.*******
-		password: *****
-
-## Crear IMAGEN Docker del PROYECTO
-NOTAS:
-	- ANTES de crear una nueva imagen, verificar si ya hay una existente que corresponda al proyecto
-	- NO es necesario hacer "gitclone" del proyecto, ya que el propio dockerfile lo hace e instala TODO
-
-	[*] Para Ver las imagenes existentes, ejecutar en "bash":
-		sudo docker images
-
-	[*] Para crear una nueva imagen:
-		Estando en el MISMO directorio del archivo "Docker", ejecutar en la terminal:
-			sudo docker build --no-cache -t mtutor-img:tag .
-
-## Ejecutar un NUEVO CONTAINER basado en una IMAGEN Docker
-NOTA:
-	- ANTES de ejecutar un container, verificar si ya hay alguno en ejecucion que corresponda al proyecto
-	- Un contenedor es una instancia en ejecución de una imagen
-	- Al ejecutar una imagen, se ejecuta un nuevo "contenedor" basado en dicha imagen
-	- Se pueden ejecutar simultaneamente distintos "contenedores" basados en una misma imagen
-
-[*] Ejecutar en la terminal:
-	sudo docker run --name MTutor-app -p 3007:3000 mtutor-img:tag
-
-	- 3007 Es el puerto de la maquina host (server)
+	- 3007 Es el puerto de la maquina host (local)
 	- 3000 Es el puerto dentro del contenedor Docker
 
 [*] Ver la APP en ejecucion:
-	http://146.83.216.166:5007/
+	http://localhost:3007/ (local)
+	http://146.83.216.166:5007/ (server)
+
 
 ## Comandos útiles DOCKER
 
-	[*] Ver las imagenes EXISTENTES
-		sudo docker images
+	[*] Ver las imágenes EXISTENTES
+		docker images (windows)
+		sudo docker images (linux)
 
 	[*] Borrar una imagen EXISTENTE
-		sudo docker rmi mtutor-img:tag
+		docker rmi mtutor-img:tag (windows)
+		sudo docker rmi mtutor-img:tag (linux)
 
 	[*] Ver TODOS los contenedores EXISTENTES
-		sudo docker ps -a
+		docker ps -a (windows)
+		sudo docker ps -a (linux)
 
 	[*] Ver SÓLO los contenedores en EJECUCIÓN
-		sudo docker ps
+		docker ps (windows)
+		sudo docker ps (linux)
 
 	[*] Iniciar la ejecucion de un contenedor EXISTENTE
-		sudo docker start Mateo
+		docker start Mateo (windows)
+		sudo docker start Mateo (linux)
 
 	[*] Detener la ejecucion de un contenedor
-		sudo docker stop Mateo
+		docker stop Mateo (windows)
+		sudo docker stop Mateo (linux)
 
 	[*] Eliminar un contenedor detenido
-		sudo docker rm Mateo
-Requerimientos:
+		docker rm Mateo (windows)
+		sudo docker rm Mateo (linux)
 
+╔════════════════╗
+║ Requerimientos ║
+╚════════════════╝
 1 - Despliegue local funcional:
 
 El sistema debe poder ejecutarse localmente en una máquina con Windows sin necesidad de Docker.
@@ -330,4 +295,4 @@ Con respecto al modelo arquitectonico, el que esta descrito en el diagrama corre
 
 Diagramas UML: 
 
-en la carpeta de recursos del proyecto estan los diagramas uml de secuencia, arquitectura y actividad que describen el proceso que se aborda con el software y la arquitectura del proyecto
+en la carpeta de recursos del proyecto estan los diagramas uml de secuencia, arquitectura y actividad que describen el proceso que se aborda con el software y la arquitectura del proyecto.

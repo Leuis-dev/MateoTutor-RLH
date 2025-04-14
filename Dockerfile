@@ -4,11 +4,11 @@ FROM node:20
 # Instala pnpm
 RUN npm install -g pnpm
 
-# Clona el repositorio de GitHub desde la rama "frontend"
-RUN git clone --branch frontend-creacion-modificacion https://github.com/fresard22/FrontEnd-MateoTutor.git /MateoTutor
+# Clona el repositorio de GitHub desde la rama "main"
+RUN git clone --branch main https://github.com/Leuis-dev/MateoTutor-RLH.git /MTutor
 
 # Establece el directorio de trabajo en el proyecto clonado
-WORKDIR /MateoTutor
+WORKDIR /MTutor
 
 # Instala las dependencias del proyecto en la carpeta "node_modules", usando pnpm
 RUN pnpm install
