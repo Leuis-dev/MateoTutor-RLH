@@ -243,8 +243,9 @@ Los usuarios deben poder acceder al sistema mediante una URL local o del servido
 
 El sistema debe permitir su ejecución remota en el servidor del curso, siendo accesible sólo mediante conexión VPN de la UACh.
 
-Especificaciones:
-
+╔══════════════════╗
+║ Especificaciones ║
+╚══════════════════╝
 1 - Comando de ejecución local:
 
 Para ejecutar el sistema localmente, se debe correr el comando pnpm dev o npm run dev dentro del directorio del proyecto.
@@ -265,8 +266,9 @@ La VPN debe ser configurada con los siguientes datos:
 	Clave pre-compartida: uaustral.,2016
 	Método de autenticación: Clave pre-compartida
   
- Requisitos funcionales (RF):
- 
+╔════════════════════════════╗
+║ Requisitos Funcionales (RF)║
+╚════════════════════════════╝
 1 - Despliegue local de la aplicación:
 
 El sistema debe permitir ejecutar la aplicación de manera local mediante los comandos npm run dev o pnpm dev, y estar disponible en http://localhost:3000.
@@ -279,8 +281,9 @@ La aplicación debe poder desplegarse en un servidor remoto al que se accede med
 
 El sistema debe permitir generar imágenes y contenedores Docker funcionales para ejecutar el proyecto, utilizando el archivo Dockerfile provisto.
 
-Requisitos no funcionales (RNF):
-
+╔═════════════════════════════════╗
+║ Requisitos No Funcionales (RNF) ║
+╚═════════════════════════════════╝
 1 - Compatibilidad multiplataforma para el desarrollo:
 
 El proyecto debe poder ejecutarse en sistemas Windows (con WSL) y también en entornos Linux para fines de desarrollo y despliegue.
@@ -289,9 +292,10 @@ El proyecto debe poder ejecutarse en sistemas Windows (con WSL) y también en en
 
 La documentación del sistema debe estar centralizada en el sitio [https://docs.lm.inf.uach.cl/instructions/client-side-template], incluyendo instrucciones sobre instalación, tecnologías, API y despliegue.
 
-Modelo arquitectonico:
-
-Con respecto al modelo arquitectonico, el que esta descrito en el diagrama correspondiente corresponde a una aqruitectura por capas
+╔═══════════════════════╗
+║ Modelo Arquitectónico ║
+╚═══════════════════════╝
+Con respecto al modelo arquitectonico, es el que esta descrito en el diagrama correspondiente corresponde a una arquitectura por capas
 
 Diagramas UML: 
 
