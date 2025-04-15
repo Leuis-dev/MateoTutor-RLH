@@ -5,6 +5,8 @@
 Este repositorio corresponde a una copia de la rama "frontend-creacion-modificacion" del proyecto [https://github.com/learner-model-uach/TutorIntegrado.git]
 Y todo el trabajo realizado aquí, es bajo el contexto de la asignatura "MÉTODOS Y MODELOS DE ING DE SOFTWARE (INFO 290)"
 
+Las tareas para el ramo de metodos y modelos estan dentro del siguente folder en drive: https://drive.google.com/drive/folders/1wXrHARQr8OX4KNQcf90KCcFOI0xAFX-b?usp=sharing
+
 
 ## Documentación original del proyecto MATEO TUTOR INTELIGENTE:
 [https://docs.lm.inf.uach.cl/instructions/client-side-template]
