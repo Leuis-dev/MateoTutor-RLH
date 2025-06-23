@@ -1,0 +1,12 @@
+# [1] Este archivo es una configuración para "Prometheus", el cual nos permite monitorear nuestra app "Next.js".
+# [2] Se ocupa "host.docker.internal" para acceder al host desde el contenedor de "Prometheus".
+# [3] Si no se usa "Docker", se ocupa "localhost" o la IP del servidor.
+
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'MTutor'
+    metrics_path: /api/metrics # Ruta donde la APP expone las métricas
+    static_configs:
+      - targets: ['host.docker.internal:3000']

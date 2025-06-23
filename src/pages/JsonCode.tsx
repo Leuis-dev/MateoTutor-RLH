@@ -8,11 +8,21 @@ export default withAuth(function SelectByCode() {
   const [showExercise, setShowExercise] = useState(false);
   const [content, setContent] = useState(null); // Estado para el contenido
 
-  // Función para manejar el clic del botón
-  const handleShowExercise = () => {
-    // Actualizar el estado del contenido al hacer clic en el botón
-    setContent(sessionState.currentContent);
-    setShowExercise(true);  // Mantener el estado para mostrar el contenido
+   // Función para manejar el clic del botón
+  const handleShowExercise = async () => {
+    
+    // PARA GRAFANA Y PROMETEUS ###############################
+    // Llama a la API para incrementar el contador
+    try {
+      await fetch('/api/increment', { method: 'POST' });
+    } catch (error) {
+      console.error('Error al reportar clic a Prometheus:', error);
+    }
+    //FIN DE GRAFANA Y PROMETEUS ##############################
+
+    // 2. Actualiza el estado del contenido
+    setContent(sessionState.currentContent); // Actualizar el estado del contenido al hacer clic en el botón
+    setShowExercise(true); // Mantener el estado para mostrar el contenido
   };
 
   return (
